@@ -54,7 +54,7 @@ namespace FunctionAppHeadless
                 chromeOptions.AddArguments("headless");
                 
 
-                var whereToSearch = Path.Combine(Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).FullName, "Chrome");
+                var whereToSearch =Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).FullName;
                 var chromeFile = SearchAccessibleFiles(whereToSearch, "chromedriver.exe");
 
                 if (chromeFile is null)

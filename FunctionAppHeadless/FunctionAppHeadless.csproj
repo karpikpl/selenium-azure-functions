@@ -4,13 +4,11 @@
 		<SccProvider>SAK</SccProvider>
 		<SccAuxPath>SAK</SccAuxPath>
 		<SccLocalPath>SAK</SccLocalPath>
+		<PublishChromeDriver>true</PublishChromeDriver>
 	</PropertyGroup>
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<AzureFunctionsVersion>v4</AzureFunctionsVersion>
-	</PropertyGroup>
-	<PropertyGroup>
-		<PublishChromeDriver>true</PublishChromeDriver>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
