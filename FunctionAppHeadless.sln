@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionAppHeadless", "FunctionAppHeadless\FunctionAppHeadless.csproj", "{A1885288-C47D-4C4E-9622-280C509F773E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1885288-C47D-4C4E-9622-280C509F773E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1885288-C47D-4C4E-9622-280C509F773E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1885288-C47D-4C4E-9622-280C509F773E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1885288-C47D-4C4E-9622-280C509F773E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B83CF6B4-2169-4BA0-A5FC-0A5FD03D721C}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/ced-it
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = FunctionAppHeadless\\FunctionAppHeadless.csproj
+		SccProjectName1 = FunctionAppHeadless
+		SccLocalPath1 = FunctionAppHeadless
+	EndGlobalSection
+EndGlobal
