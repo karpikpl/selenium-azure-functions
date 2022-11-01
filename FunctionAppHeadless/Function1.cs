@@ -49,20 +49,22 @@ namespace FunctionAppHeadless
                 if (!Monitor.TryEnter(SyncRoot))
                     return; // already running
 
+                // chromedriver for linux, chromedriver.exe for windows
+                const string chromeDriverName = "chromedriver";
 
                 var chromeOptions = new ChromeOptions();
                 chromeOptions.AddArguments("headless");
 
                 var whereToSearch = Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).FullName;
-                var chromeFile = SearchAccessibleFiles(whereToSearch, "chromedriver.exe", log);
+                var chromeFile = SearchAccessibleFiles(whereToSearch, chromeDriverName, log);
 
                 if (chromeFile is null)
                 {
-                    throw new FileNotFoundException("Could not find chromedriver.exe in the current directory or any of its subdirectories.");
+                    throw new FileNotFoundException($"Could not find {chromeDriverName} in the current directory or any of its subdirectories.");
                 }
                 else
                 {
-                    log.LogInformation($"Found chromedriver.exe at {chromeFile}. Will provide parent folder to Driver {Directory.GetParent(chromeFile).FullName}");
+                    log.LogInformation($"Found {chromeDriverName} at {chromeFile}. Will provide parent folder to Driver {Directory.GetParent(chromeFile).FullName}");
                 }
 
                 using IWebDriver driver = new ChromeDriver(Directory.GetParent(chromeFile).FullName, chromeOptions);
@@ -76,7 +78,7 @@ namespace FunctionAppHeadless
 
                 foreach (var test in Tests)
                 {
-                   test.Run(myTimer, log, Browser);
+                    test.Run(myTimer, log, Browser);
                 }
                 Browser.Close();
             }
@@ -85,7 +87,7 @@ namespace FunctionAppHeadless
                 log.LogError(ex, "Exception thrown for Selenium.");
             }
             finally
-            { 
+            {
                 Monitor.Exit(SyncRoot);
             }
         }
