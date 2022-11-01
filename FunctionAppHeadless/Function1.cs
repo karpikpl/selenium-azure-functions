@@ -52,17 +52,19 @@ namespace FunctionAppHeadless
 
                 var chromeOptions = new ChromeOptions();
                 chromeOptions.AddArguments("headless");
-                
 
-                var whereToSearch =Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).FullName;
-                var chromeFile = SearchAccessibleFiles(whereToSearch, "chromedriver.exe");
+                var whereToSearch = Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).FullName;
+                var chromeFile = SearchAccessibleFiles(whereToSearch, "chromedriver.exe", log);
 
                 if (chromeFile is null)
                 {
                     throw new FileNotFoundException("Could not find chromedriver.exe in the current directory or any of its subdirectories.");
                 }
+                else
+                {
+                    log.LogInformation($"Found chromedriver.exe at {chromeFile}. Will provide parent folder to Driver {Directory.GetParent(chromeFile).FullName}");
+                }
 
-                //using IWebDriver driver = new ChromeDriver(Path.GetDirectoryName(chromeFile), chromeOptions);
                 using IWebDriver driver = new ChromeDriver(Directory.GetParent(chromeFile).FullName, chromeOptions);
 
                 var Browser = driver;
@@ -74,25 +76,23 @@ namespace FunctionAppHeadless
 
                 foreach (var test in Tests)
                 {
-                    using (test)
-                    {
-                        test.Run(myTimer, log, Browser);
-                    }
+                   test.Run(myTimer, log, Browser);
                 }
+                Browser.Close();
             }
             catch (Exception ex)
             {
                 log.LogError(ex, "Exception thrown for Selenium.");
             }
             finally
-            {
+            { 
                 Monitor.Exit(SyncRoot);
             }
         }
 
-        string? SearchAccessibleFiles(string root, string fileName)
+        string? SearchAccessibleFiles(string root, string fileName, ILogger log)
         {
-            Console.WriteLine($"Searching for {fileName} in {root}.");
+            log.LogInformation($"Searching for {fileName} in {root}.");
             var file = Directory.EnumerateFiles(root).FirstOrDefault(m => m.EndsWith(fileName));
 
             if (file is not null)
@@ -104,7 +104,7 @@ namespace FunctionAppHeadless
             {
                 try
                 {
-                    var fileFound = SearchAccessibleFiles(subDir, fileName);
+                    var fileFound = SearchAccessibleFiles(subDir, fileName, log);
 
                     if (fileFound is not null)
                     {

@@ -14,7 +14,7 @@ using WebDriverManager.Helpers;
 
 namespace FunctionAppHeadless.Tests
 {
-    public abstract class BaseTest : IDisposable
+    public abstract class BaseTest
     {
         #region Properties
         protected TelemetryClient TelemetryClient { get; private set; }
@@ -69,25 +69,6 @@ namespace FunctionAppHeadless.Tests
             var timeSpan = TimeSpan.FromMilliseconds(milliseconds);
 
             return timeSpan.ToString(@"hh\h\:mm\m\:ss\s\:fff\m\s");
-        }
-        #endregion
-
-        #region IDisposable Implementation
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        public void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (Browser is not null)
-                {
-                    Browser.Quit();
-                }
-            }
         }
         #endregion
     }
