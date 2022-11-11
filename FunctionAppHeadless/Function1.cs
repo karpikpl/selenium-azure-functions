@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using WebDriverManager;
 
 namespace FunctionAppHeadless
 {
@@ -55,8 +56,8 @@ namespace FunctionAppHeadless
                 var chromeOptions = new ChromeOptions();
                 chromeOptions.AddArguments("headless");
 
-                var whereToSearch = Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).FullName;
-                var chromeFile = SearchAccessibleFiles(whereToSearch, chromeDriverName, log);
+                //var whereToSearch = Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).FullName;
+                var chromeFile = SearchAccessibleFiles("/Chrome", chromeDriverName, log);
 
                 if (chromeFile is null)
                 {
@@ -67,7 +68,12 @@ namespace FunctionAppHeadless
                     log.LogInformation($"Found {chromeDriverName} at {chromeFile}. Will provide parent folder to Driver {Directory.GetParent(chromeFile).FullName}");
                 }
 
+                //new WebDriver()
+
                 using IWebDriver driver = new ChromeDriver(Directory.GetParent(chromeFile).FullName, chromeOptions);
+                //using IWebDriver driver = new ChromeDriver(chromeOptions);
+                //new DriverManager().SetUpDriver(new WebDriverManager.DriverConfigs.Impl.ChromeConfig());
+                //using IWebDriver driver = new ChromeDriver(chromeOptions);
 
                 var Browser = driver;
                 var options = Browser.Manage();
