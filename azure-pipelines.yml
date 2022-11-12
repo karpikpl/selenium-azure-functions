@@ -23,6 +23,13 @@ steps:
 
 - task: DotNetCoreCLI@2
   inputs:
+    command: 'run'
+    projects: '**/ConsoleApp.csproj'
+  env:
+    APPINSIGHTSCONNECTIONSTRING: $(AppInsightsConnectionString)
+
+- task: DotNetCoreCLI@2
+  inputs:
     command: 'test'
     projects: '**/Tests.csproj'
     testRunTitle: 'Selenium'
