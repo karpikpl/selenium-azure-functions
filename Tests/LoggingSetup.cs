@@ -25,6 +25,9 @@ namespace Tests
         [OneTimeSetUp]
         public static void Setup()
         {
+            var appInsightsConnectionString = System.Environment.GetEnvironmentVariable("AppInsightsConnectionString");
+            Console.WriteLine($"my connection string: {appInsightsConnectionString}");
+
             IServiceCollection services = new ServiceCollection();
             services.Configure<TelemetryConfiguration>(config => config.TelemetryChannel = _channel);
             services.AddLogging(builder =>

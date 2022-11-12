@@ -60,9 +60,9 @@ namespace Tests
         public void TearDown()
         {
             using var scope = _logger.BeginScope(new Dictionary<string, object> {
-            { "TestName", TestContext.CurrentContext.Test.Name },
-            { "FullName", TestContext.CurrentContext.Test.FullName }
-        });
+    { "TestName", TestContext.CurrentContext.Test.Name },
+    { "FullName", TestContext.CurrentContext.Test.FullName }
+});
             var result = TestContext.CurrentContext.Result;
 
             switch (result.Outcome.Status)
