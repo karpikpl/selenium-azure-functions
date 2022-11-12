@@ -25,7 +25,7 @@ namespace Tests
         [OneTimeSetUp]
         public static void Setup()
         {
-            var appInsightsConnectionString = System.Environment.GetEnvironmentVariable("AppInsightsConnectionString");
+            var appInsightsConnectionString = System.Environment.GetEnvironmentVariable("APPINSIGHTSCONNECTIONSTRING");
             Console.WriteLine($"my connection string: {appInsightsConnectionString}");
 
             IServiceCollection services = new ServiceCollection();
@@ -35,7 +35,7 @@ namespace Tests
                 // Only Application Insights is registered as a logger provider
                 builder.AddApplicationInsights(
 
-                    configureTelemetryConfiguration: (conf) => conf.ConnectionString = System.Environment.GetEnvironmentVariable("AppInsightsConnectionString"),
+                    configureTelemetryConfiguration: (conf) => conf.ConnectionString = System.Environment.GetEnvironmentVariable("APPINSIGHTSCONNECTIONSTRING"),
                     configureApplicationInsightsLoggerOptions: (options) => { }
                 );
                 builder.AddConsole();
