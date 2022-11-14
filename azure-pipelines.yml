@@ -16,7 +16,10 @@ steps:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
+    echo cs=$AppInsightsConnectionString
   displayName: 'Run a multi-line script'
+  env:
+    AppInsightsConnectionString: $(AppInsightsConnectionString)
 
 - task: DotNetCoreCLI@2
   inputs:
